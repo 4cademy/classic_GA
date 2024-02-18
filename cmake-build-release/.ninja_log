@@ -1,0 +1,15 @@
+# ninja log v5
+7	369	7299937601960747	CMakeFiles/classic_GA.dir/objective_functions.cpp.obj	117f8b382b9d0da2
+3	488	7299937603160653	CMakeFiles/classic_GA.dir/main.cpp.obj	4dc459fc9db1bda7
+10	1057	7299937608840167	CMakeFiles/classic_GA.dir/ga.cpp.obj	3aaba3ada389ff82
+1057	1375	7299937611959879	classic_GA.exe	72a572e2698dec2f
+11	377	7299939504527786	CMakeFiles/classic_GA.dir/objective_functions.cpp.obj	8a9b5c41667dd6a9
+3	501	7299939505767690	CMakeFiles/classic_GA.dir/main.cpp.obj	5476cfd6f047397c
+7	1074	7299939511507193	CMakeFiles/classic_GA.dir/ga.cpp.obj	ee70d498d676c85d
+1075	1383	7299939514526933	classic_GA.exe	604941cb1979aa65
+4	1071	7299939765013420	CMakeFiles/classic_GA.dir/ga.cpp.obj	ee70d498d676c85d
+1072	1372	7299939767963126	classic_GA.exe	604941cb1979aa65
+3	1041	7299952363871038	CMakeFiles/classic_GA.dir/ga.cpp.obj	ee70d498d676c85d
+1042	1342	7299952366820840	classic_GA.exe	604941cb1979aa65
+2	482	7299952636819369	CMakeFiles/classic_GA.dir/main.cpp.obj	5476cfd6f047397c
+482	781	7299952639749147	classic_GA.exe	604941cb1979aa65

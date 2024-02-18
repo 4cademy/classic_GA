@@ -1,0 +1,5 @@
+# ninja log v5
+3	305	7299907520488007	CMakeFiles/classic_GA.dir/objective_functions.cpp.obj	246ebba06605558d
+7	924	7299907526677989	CMakeFiles/classic_GA.dir/ga.cpp.obj	fdc1f1ae29b5d4ae
+10	491	7299907522348018	CMakeFiles/classic_GA.dir/main.cpp.obj	e6cd7885400102e5
+924	1044	7299907527847975	classic_GA.exe	84c6290b9154cdc7
