@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include"ga.h"
 
 int main(int argc, char* argv[]) {
@@ -28,8 +29,21 @@ int main(int argc, char* argv[]) {
     std::cout << "FUNCTION_EVALS: " << FUNCTION_EVALS << std::endl;
     */
 
-    Ga *ga0 = new Ga(POPSIZE, DIM, MIN, MAX, FUNCTION_NO);
-    ga0->evolve(FUNCTION_EVALS);
+    Ga *ga0 = new Ga(POPSIZE/2, DIM, MIN, MAX, FUNCTION_NO, true);
+    Ga *ga1 = new Ga(POPSIZE/2, DIM, MIN, MAX, FUNCTION_NO, true);
+
+    for (int i = 0; i < 2; i++) {
+        ga0->evolve(FUNCTION_EVALS/2);
+        ga1->evolve(FUNCTION_EVALS/2);
+
+        std::vector<float> best_solution0 = ga0->best_solution;
+        std::vector<float> best_solution1 = ga1->best_solution;
+
+        ga0->pop[ga0->max_fitness_index] = best_solution1;
+        ga1->pop[ga1->max_fitness_index] = best_solution0;
+    }
+
     ga0->~Ga();
+    ga1->~Ga();
     return 0;
 }

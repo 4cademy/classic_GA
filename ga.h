@@ -12,10 +12,10 @@
 class Ga {
 public:
     Ga()= delete;
-    Ga(int pop_size, int dim, float min_gene, float max_gene, int function_no);
+    Ga(int pop_size, int dim, float min_gene, float max_gene, int function_no, bool log = true);
     Ga(const Ga& ga) = delete;
     Ga(Ga&& ga) = delete;
-    ~Ga() = default;
+    ~Ga();
     void evolve(int generations);
 
     int pop_size{};
@@ -32,11 +32,15 @@ public:
     float best_fitness = HUGE_VALF;
     std::vector<float> best_solution{};
 
+    std::string log_file_name = "log.csv";
+
 private:
+    bool log = true;
     void compute_fitness();
     std::vector<int> linear_rank_selection();
     std::vector<std::vector<float>> uniform_crossover(const std::vector<int>& mating_list);
     void non_uniform_mutation();
+    void write_to_log( const std::string &text );
 };
 
 

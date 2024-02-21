@@ -21,13 +21,23 @@ std::random_device shade_rd;
 const std::random_device::result_type seed = shade_rd();
 std::mt19937_64 gen(seed + std::hash<std::thread::id>{}(std::this_thread::get_id()));
 
+void Ga::write_to_log( const std::string &text ){
+    std::ofstream log_file(
+            log_file_name, std::ios_base::out | std::ios_base::app );
+    log_file << text << std::endl;
+}
+
 // constructor for the class Ga
-Ga::Ga(int pop_size, int dim, float min_gene, float max_gene, int function_no) {
+Ga::Ga(int pop_size, int dim, float min_gene, float max_gene, int function_no, bool log) {
     this->pop_size = pop_size;
     this->dim = dim;
     this->min_gene = min_gene;
     this->max_gene = max_gene;
     this->function_no = function_no;
+    this->log = log;
+    std::stringstream ss;
+    ss << this;
+    this->log_file_name = ss.str() + ".csv";
 
     // initialize population
     pop = std::vector<std::vector<float>>(pop_size, std::vector<float>(dim));
@@ -43,8 +53,13 @@ Ga::Ga(int pop_size, int dim, float min_gene, float max_gene, int function_no) {
 
     // compute fitness
     compute_fitness();
+}
 
-    std::cout << min_fitness << std::endl;
+// destructor for the class Ga
+Ga::~Ga() {
+    if (log) {
+        write_to_log(std::to_string(best_fitness));
+    }
 }
 
 void Ga::compute_fitness() {
@@ -68,6 +83,10 @@ void Ga::compute_fitness() {
     if (min_fitness < best_fitness) {
         best_fitness = min_fitness;
         best_solution = pop[min_fitness_index];
+    }
+
+    if (log) {
+        write_to_log(std::to_string(min_fitness));
     }
 }
 
@@ -141,7 +160,5 @@ void Ga::evolve(int generations) {
         pop = trial_population;
         non_uniform_mutation();
         compute_fitness();
-        std::cout << min_fitness << std::endl;
     }
-    std::cout << best_fitness << std::endl;
 }
