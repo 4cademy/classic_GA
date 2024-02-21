@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <cmath>
+#include <random>
 
 #ifndef GENETIC_ALGORITHM_VLSI_V2_GA_H
 #define GENETIC_ALGORITHM_VLSI_V2_GA_H
@@ -35,6 +36,7 @@ public:
     std::string log_file_name = "log.csv";
 
 private:
+    std::mt19937_64 gen;
     bool log = true;
     void compute_fitness();
     std::vector<int> linear_rank_selection();
