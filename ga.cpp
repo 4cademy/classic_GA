@@ -15,11 +15,7 @@
 
 #include "objective_functions.h"
 
-
-// create random number generator by seeding with device specific random number and hash of thread id
 std::random_device shade_rd;
-const std::random_device::result_type seed = shade_rd();
-std::mt19937_64 gen(seed + std::hash<std::thread::id>{}(std::this_thread::get_id()));
 
 void Ga::write_to_log( const std::string &text ){
     std::ofstream log_file(
@@ -29,6 +25,10 @@ void Ga::write_to_log( const std::string &text ){
 
 // constructor for the class Ga
 Ga::Ga(int pop_size, int dim, float min_gene, float max_gene, int function_no, bool log) {
+    auto now = std::chrono::system_clock::now();
+    const std::random_device::result_type seed = shade_rd();
+    gen = std::mt19937_64(seed + std::hash<std::thread::id>{}(std::this_thread::get_id()) + std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count());
+
     this->pop_size = pop_size;
     this->dim = dim;
     this->min_gene = min_gene;
