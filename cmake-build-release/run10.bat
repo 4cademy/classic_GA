@@ -6,12 +6,12 @@ for /L %%k in (1, 1, 7) do (
     set /A no_subpops=!no_subpops!*2
     echo Running with !no_subpops! subpopulations
     set /A sequences=1
-    for /L %%j in (1, 1, 7) do (
+    for /L %%j in (1, 1, 11) do (
         set /A sequences=!sequences!*2
         echo Running with !sequences! sequences
         for /L %%i in (1, 1, 10) do (
             echo Running iteration %%i
-            classic_GA.exe 1024 !no_subpops! 1000 -600 600 1 1024 !sequences!
+            classic_GA.exe 1024 !no_subpops! 1000 -32.768 32.768 0 2048 !sequences!
         )
         python merge.py ./
         set /A sequence_length=1024/!sequences!
