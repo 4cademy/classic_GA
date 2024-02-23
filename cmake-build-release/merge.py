@@ -23,6 +23,13 @@ for csv_file in csv_files:
     data = pd.read_csv(csv_file, header=None)  # Assuming there are no headers in the input files
     combined_data = pd.concat([combined_data, data], axis=1)
 
+combined_data[combined_data.columns.size] = combined_data.mean(axis=1)
+min = combined_data.iloc[-1].min()
+max = combined_data.iloc[-1].max()
+combined_data.loc[combined_data.shape[0]] = [None]*(combined_data.shape[1]-1) + [min]
+combined_data.loc[combined_data.shape[0]] = [None]*(combined_data.shape[1]-1) + [max]
+
+
 # Save the combined data to a new CSV file
 combined_data.to_csv('combined_output_tmp.csv', index=False, header=False)
 
@@ -35,6 +42,5 @@ with open('combined_output_tmp.csv', 'r') as tmp:
 
 # Remove temporary file
 os.remove("combined_output_tmp.csv")
-
 
 print("Combined CSV file saved as 'combined_output.csv'")
