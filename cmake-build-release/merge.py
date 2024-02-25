@@ -23,6 +23,10 @@ for csv_file in csv_files:
     data = pd.read_csv(csv_file, header=None)  # Assuming there are no headers in the input files
     combined_data = pd.concat([combined_data, data], axis=1)
 
+# Before calculating the mean, convert the DataFrame to use float64 data type
+combined_data = combined_data.astype('float64')
+
+# Now calculate the mean as before
 combined_data[combined_data.columns.size] = combined_data.mean(axis=1)
 min = combined_data.iloc[-1].min()
 max = combined_data.iloc[-1].max()
