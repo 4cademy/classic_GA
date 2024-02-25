@@ -2,6 +2,7 @@
 #include <fstream>
 #include <algorithm>
 #include"ga.h"
+#include "omp.h"
 
 void move_best_percent(Ga* from, Ga* to, float percentage) {
     int pop_size = from->pop_size;
@@ -68,6 +69,7 @@ int main(int argc, char* argv[]) {
 
     float best_percentage = 0.1;
     for (int i = 0; i < NO_SEQUENCES; i++) {
+#pragma omp parallel for default(none) shared(ga_vector, best_percentage, NO_SUBPOPS, FUNCTION_EVALS, NO_SEQUENCES)
         for (int j = 0; j < NO_SUBPOPS; j++) {
             ga_vector[j]->evolve(FUNCTION_EVALS / NO_SEQUENCES);
         }
